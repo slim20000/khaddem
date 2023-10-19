@@ -1,5 +1,7 @@
 package tn.esprit.spring.khaddem.services;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,8 @@ import tn.esprit.spring.khaddem.repositories.DepartementRepository;
 import tn.esprit.spring.khaddem.repositories.UniversiteRepository;
 import javax.transaction.Transactional;
 import java.util.List;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 @Slf4j
 public class UniversiteServiceImpl implements  IUniversiteService{

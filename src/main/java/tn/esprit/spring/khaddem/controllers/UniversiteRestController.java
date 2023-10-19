@@ -3,12 +3,15 @@ package tn.esprit.spring.khaddem.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.khaddem.entities.Universite;
 import tn.esprit.spring.khaddem.services.IUniversiteService;
 import java.util.List;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Tag(name = "Gestion des universités")
 @RestController
 @RequestMapping("/universite")

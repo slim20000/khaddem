@@ -1,5 +1,7 @@
 package tn.esprit.spring.khaddem.controllers;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.khaddem.entities.Contrat;
@@ -7,7 +9,8 @@ import tn.esprit.spring.khaddem.entities.Departement;
 import tn.esprit.spring.khaddem.services.IDepartementService;
 
 import java.util.List;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @RestController
 @RequestMapping("/departement")
 
