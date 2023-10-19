@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.khaddem.entities.Universite;
 import tn.esprit.spring.khaddem.services.IUniversiteService;
@@ -40,11 +42,13 @@ public class UniversiteRestController {
     // http://localhost:8089/Kaddem/universite/add-universite
     @PostMapping("/add-universite")
     @Operation(description = "ajouter une université")
-    @ResponseBody
     public Universite addUniversite(@RequestBody Universite u) {
+        System.out.println("Received request: " + u);
         Universite universite = universiteService.addUniversite(u);
+        System.out.println("Sending response: " + universite);
         return universite;
     }
+
 
     // http://localhost:8089/Kaddem/universite/update-universite
     @PutMapping("/update-universite")

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,14 +22,16 @@ import tn.esprit.spring.khaddem.services.IUniversiteService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.slf4j.Logger;
 
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(UniversiteRestController.class)
@@ -39,6 +42,7 @@ public class UniversiteRestControllerTest {
 
     @MockBean
     private IUniversiteService universiteService;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private static final Logger logger = LoggerFactory.getLogger(UniversiteRestControllerTest.class);
 
@@ -50,24 +54,20 @@ public class UniversiteRestControllerTest {
 
     @Test
     public void testAddUniversite() throws Exception {
-        logger.info("Starting test Universite ...");
+        Universite mockInputUniversite = new Universite("University C", new ArrayList<>());
+        Universite mockSavedUniversite = new Universite("University C", new ArrayList<>());
+        mockSavedUniversite.setIdUniversite(1);
 
-        List<Departement> departementsList = new ArrayList<>();
-
-        Universite mockInputUniversite = new Universite("University C", departementsList);
-
-        Universite mockSavedUniversite = new Universite(3, "University C", departementsList);
-
-        when(universiteService.addUniversite(mockInputUniversite)).thenReturn(mockSavedUniversite);
+        when(universiteService.addUniversite(any(Universite.class))).thenReturn(mockSavedUniversite);
 
         mockMvc.perform(post("/universite/add-universite")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(mockInputUniversite)))
+                        .content("{\"idUniversite\": 0,\"nomUniv\": \"String\",\"departements\": []}"))
+
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nomUniv", is("University C")));
-
-        logger.info("completed successfully.");
+                .andExpect(jsonPath("$.nomUniv").value("University C"))
+                .andExpect(jsonPath("$.idUniversite").value(1));
     }
 
     @Test
