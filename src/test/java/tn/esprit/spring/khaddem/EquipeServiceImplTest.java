@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class EquipeServiceImplTest {
+ class EquipeServiceImplTest {
 
     @InjectMocks
     private EquipeServiceImpl equipeService;
@@ -33,7 +33,7 @@ public class EquipeServiceImplTest {
 
 
     @Test
-    public void testEvoluerEquipes() {
+     void testEvoluerEquipes() {
         Etudiant etudiant = new Etudiant();
         etudiant.setIdEtudiant(1);
 
@@ -69,7 +69,7 @@ public class EquipeServiceImplTest {
         return calendar.getTime();
     }
     @Test
-    public void retrieveAllEquipesTest() {
+     void retrieveAllEquipesTest() {
         when(equipeRepository.findAll()).thenReturn(Arrays.asList(new Equipe(), new Equipe()));
 
         List<Equipe> equipes = equipeService.retrieveAllEquipes();
@@ -78,7 +78,7 @@ public class EquipeServiceImplTest {
         verify(equipeRepository, times(1)).findAll();
     }
     @Test
-    public void addEquipeTest() {
+     void addEquipeTest() {
         Equipe equipe = new Equipe();
         when(equipeRepository.save(equipe)).thenReturn(equipe);
 
@@ -89,7 +89,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void updateEquipeTest() {
+     void updateEquipeTest() {
         Equipe equipe = new Equipe();
         when(equipeRepository.save(equipe)).thenReturn(equipe);
 
@@ -100,7 +100,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void retrieveEquipeTest() {
+     void retrieveEquipeTest() {
         Integer id = 1;
         Equipe equipe = new Equipe();
         when(equipeRepository.findById(id)).thenReturn(Optional.of(equipe));
