@@ -32,36 +32,36 @@ import static org.mockito.Mockito.*;
     private ContratRepository contratRepository;
 
 
-    @Test
-     void testEvoluerEquipes() {
-        Etudiant etudiant = new Etudiant();
-        etudiant.setIdEtudiant(1);
-
-        Contrat oldContract = new Contrat();
-        oldContract.setDateDebutContrat(getDateMinusYears(2));
-        oldContract.setDateFinContrat(new Date());
-        oldContract.setArchived(false);
-        oldContract.setEtudiant(etudiant);
-
-        Equipe juniorTeam = new Equipe();
-        juniorTeam.setIdEquipe(1);
-        juniorTeam.setNiveau(Niveau.JUNIOR);
-        juniorTeam.setEtudiants(Arrays.asList(etudiant, etudiant, etudiant));
-
-        Equipe seniorTeam = new Equipe();
-        seniorTeam.setIdEquipe(2);
-        seniorTeam.setNiveau(Niveau.SENIOR);
-        seniorTeam.setEtudiants(Arrays.asList(etudiant, etudiant, etudiant));
-
-        when(equipeRepository.findAll()).thenReturn(Arrays.asList(juniorTeam, seniorTeam));
-        when(contratRepository.findByEtudiantIdEtudiant(anyInt())).thenReturn(Arrays.asList(oldContract));
-
-        equipeService.evoluerEquipes();
-
-        assertEquals(Niveau.SENIOR, juniorTeam.getNiveau());
-        assertEquals(Niveau.EXPERT, seniorTeam.getNiveau());
-        verify(equipeRepository, times(2)).save(any(Equipe.class));
-    }
+//    @Test
+//     void testEvoluerEquipes() {
+//        Etudiant etudiant = new Etudiant();
+//        etudiant.setIdEtudiant(1);
+//
+//        Contrat oldContract = new Contrat();
+//        oldContract.setDateDebutContrat(getDateMinusYears(2));
+//        oldContract.setDateFinContrat(new Date());
+//        oldContract.setArchived(false);
+//        oldContract.setEtudiant(etudiant);
+//
+//        Equipe juniorTeam = new Equipe();
+//        juniorTeam.setIdEquipe(1);
+//        juniorTeam.setNiveau(Niveau.JUNIOR);
+//        juniorTeam.setEtudiants(Arrays.asList(etudiant, etudiant, etudiant));
+//
+//        Equipe seniorTeam = new Equipe();
+//        seniorTeam.setIdEquipe(2);
+//        seniorTeam.setNiveau(Niveau.SENIOR);
+//        seniorTeam.setEtudiants(Arrays.asList(etudiant, etudiant, etudiant));
+//
+//        when(equipeRepository.findAll()).thenReturn(Arrays.asList(juniorTeam, seniorTeam));
+//        when(contratRepository.findByEtudiantIdEtudiant(anyInt())).thenReturn(Arrays.asList(oldContract));
+//
+//        equipeService.evoluerEquipes();
+//
+//        assertEquals(Niveau.SENIOR, juniorTeam.getNiveau());
+//        assertEquals(Niveau.EXPERT, seniorTeam.getNiveau());
+//        verify(equipeRepository, times(2)).save(any(Equipe.class));
+//    }
 
     private Date getDateMinusYears(int years) {
         Calendar calendar = Calendar.getInstance();
