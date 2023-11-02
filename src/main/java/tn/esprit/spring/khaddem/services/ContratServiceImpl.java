@@ -50,10 +50,8 @@ public class ContratServiceImpl implements  IContratService{
 
     @Override
     public Contrat addContrat(Contrat c) {
-       // start date t1
         contratRepository.save(c);
 
-        // te =t2-t1;
         return c;
     }
 
