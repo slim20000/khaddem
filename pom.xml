@@ -85,16 +85,6 @@
             <url>http://172.17.0.1:8081/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
-<!--    <distributionManagement>-->
-<!--        <snapshotRepository>-->
-<!--            <id>deploymentRepo</id>-->
-<!--            <url>http://192.168.245.129:8081/repository/maven-snapshots/</url>-->
-<!--        </snapshotRepository>-->
-<!--        <repository>-->
-<!--            <id>deploymentRepo</id>-->
-<!--            <url>http://192.168.245.129:8081/repository/maven-releases/</url>-->
-<!--        </repository>-->
-<!--    </distributionManagement>-->
     <build>
         <plugins>
             <plugin>
@@ -108,6 +98,11 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
