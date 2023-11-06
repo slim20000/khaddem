@@ -14,7 +14,11 @@ services:
       - "8089:8089"
     depends_on:
       - db
-
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8089/Kaddem/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
   db:
     image: mysql:5.7
     environment:
