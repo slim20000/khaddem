@@ -25,6 +25,14 @@ services:
       - "3307:3306"
     volumes:
       - db-data:/var/lib/mysql
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    environment:
+      DATA_SOURCE_NAME: 'root:@(db:3306)/'
+    ports:
+      - "9104:9104"
+    depends_on:
+      - db
 
 volumes:
   db-data:
