@@ -11,7 +11,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL-AUTO=update
       - SPRING_JPA_SHOW-SQL=true
     ports:
-      - "8089:8089"
+      - "0.0.0.0:8089:8089"
     depends_on:
       - db
   mysqld_exporter:
