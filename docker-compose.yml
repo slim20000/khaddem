@@ -7,7 +7,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/khaddemApp?useUnicode=true&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_PASSWORD=
       - SPRING_JPA_HIBERNATE_DDL-AUTO=update
       - SPRING_JPA_SHOW-SQL=true
     ports:
@@ -19,17 +19,16 @@ services:
     image: mysql:5.7
     environment:
       - MYSQL_DATABASE=khaddemApp
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "3307:3306"
     volumes:
       - db-data:/var/lib/mysql
-
   mysqld-exporter:
     image: prom/mysqld-exporter
     environment:
-      DATA_SOURCE_NAME: 'root:@tcp(db:3306)/'
+      DATA_SOURCE_NAME: 'root:@(db:3306)/'
     ports:
       - "9104:9104"
     depends_on:
